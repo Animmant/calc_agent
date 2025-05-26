@@ -1,3 +1,7 @@
+# =============================================================================
+# CALCULATOR AGENT PROJECT - CORRECTED .GITIGNORE
+# =============================================================================
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -50,6 +54,7 @@ coverage.xml
 *.py,cover
 .hypothesis/
 .pytest_cache/
+.ruff_cache/
 
 # Translations
 *.mo
@@ -96,12 +101,16 @@ celerybeat.pid
 
 # Environments
 .env
+.env.local
+.env.*.local
 .venv
 env/
 venv/
+venv_*/
 ENV/
 env.bak/
 venv.bak/
+conda-meta/
 
 # Spyder project settings
 .spyderproject
@@ -120,3 +129,304 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# pytype static type analyzer
+.pytype/
+
+# Cython debug symbols
+cython_debug/
+
+# =============================================================================
+# AI/ML SPECIFIC
+# =============================================================================
+
+# Model files
+*.pkl
+*.joblib
+*.h5
+*.hdf5
+*.pb
+*.pth
+*.pt
+*.onnx
+*.tflite
+*.mlmodel
+*.safetensors
+models/
+checkpoints/
+model_cache/
+huggingface_cache/
+
+# Large data files (but allow small test data)
+datasets/
+large_data/
+training_data/
+# Allow small test files:
+# !tests/data/
+# !examples/data/
+
+# Embeddings and vector stores
+embeddings/
+vector_store/
+faiss_index/
+chroma_db/
+pinecone_cache/
+
+# LangChain specific
+.langchain/
+langchain_cache/
+.langsmith/
+
+# =============================================================================
+# API KEYS AND SECRETS (SPECIFIC FILES ONLY)
+# =============================================================================
+
+# Environment and secrets
+.env.production
+.env.development
+.env.staging
+.env.test
+.env.backup
+
+# Specific secret files
+secrets.json
+api_keys.txt
+api_keys.json
+credentials.json
+service_account.json
+google-cloud-key.json
+gcp-key.json
+openai_key.txt
+anthropic_key.txt
+
+# Certificate files
+*.pem
+*.key
+*.crt
+*.p12
+*.pfx
+
+# Cloud config directories
+.gcloud/
+.aws/
+.azure/
+
+# =============================================================================
+# IDEs AND EDITORS
+# =============================================================================
+
+# PyCharm
+.idea/
+*.iws
+*.iml
+*.ipr
+out/
+
+# Visual Studio Code
+.vscode/
+*.code-workspace
+
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
+
+# Vim
+*.swp
+*.swo
+*~
+.netrwhist
+
+# Emacs
+*~
+\#*\#
+/.emacs.desktop
+/.emacs.desktop.lock
+*.elc
+auto-save-list
+tramp
+.\#*
+
+# Cursor IDE
+.cursor/
+
+# JetBrains IDEs
+.idea/
+*.iml
+
+# =============================================================================
+# OPERATING SYSTEMS
+# =============================================================================
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon$'\r'
+._*
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+*.stackdump
+[Dd]esktop.ini
+$RECYCLE.BIN/
+*.cab
+*.msi
+*.msix
+*.msm
+*.msp
+*.lnk
+
+# Linux
+.fuse_hidden*
+.directory
+.Trash-*
+.nfs*
+
+# =============================================================================
+# LOGS AND TEMPORARY FILES
+# =============================================================================
+
+# Log files (specific patterns to avoid conflicts)
+logs/
+*.log.*
+app.log
+debug.log
+error.log
+access.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+
+# Runtime data
+pids/
+*.pid
+*.seed
+*.pid.lock
+
+# Coverage directory
+coverage/
+*.lcov
+.nyc_output
+
+# Build tools
+.grunt
+bower_components/
+node_modules/
+.npm
+.eslintcache
+
+# =============================================================================
+# DOCUMENTATION AND OUTPUTS
+# =============================================================================
+
+# Generated documentation
+docs/build/
+docs/_build/
+site/
+_site/
+
+# Generated reports (but allow example PDFs)
+reports/
+outputs/
+generated_reports/
+
+# LaTeX auxiliary files
+*.aux
+*.bbl
+*.blg
+*.fdb_latexmk
+*.fls
+*.synctex.gz
+*.toc
+
+# =============================================================================
+# DATABASES
+# =============================================================================
+
+# Database files
+*.db
+*.sqlite
+*.sqlite3
+*.mdb
+*.accdb
+
+# =============================================================================
+# CLOUD AND DEPLOYMENT
+# =============================================================================
+
+# Docker
+.dockerignore
+Dockerfile.prod
+
+# Terraform
+*.tfstate
+*.tfstate.*
+.terraform/
+.terraform.lock.hcl
+
+# Kubernetes
+*.yaml.bak
+*.yml.bak
+k8s-secrets/
+
+# Cloud platforms
+.vercel
+.netlify
+
+# =============================================================================
+# BACKUP AND TEMPORARY
+# =============================================================================
+
+# Backup files
+*.bak
+*.backup
+*.old
+*.orig
+*.tmp
+
+# Archive files (project-specific)
+backup_*.zip
+archive_*.tar.gz
+old_versions.rar
+
+# =============================================================================
+# PROJECT SPECIFIC
+# =============================================================================
+
+# Calculator Agent specific
+calc_history/
+user_sessions/
+debug_output/
+test_results/
+performance_logs/
+
+# Experimental files
+experiments/
+sandbox/
+playground/
+
+# Cache directories
+.cache/
+cache/
+tmp/
+temp/
+
+# Generated files
+generated/
+auto_generated/
