@@ -1,12 +1,28 @@
 # This is the requirements.txt file.
-# Core LangChain packages
-langchain==0.3.25
-langchain-openai>=0.3.15
+# Core LangChain and LangGraph packages
+langchain-core>=0.3.25
+langchain-community>=0.3.20
+langchain-openai>=0.3.18
 langchain-google-genai==2.1.0
+langgraph>=0.2.40
+langgraph-checkpoint>=2.0.0
 
-google-generativeai>=0.8.0
+# Google API packages
 google-api-python-client>=2.0.0
+
+# --- Development & Testing ---
+pytest>=8.0.0
 python-dotenv>=1.0.0
-pytest==8.0.0
+
+# --- Data Processing (if needed) ---
+numpy>=2.1.0
+# pandas>=2.2.0
+# matplotlib>=3.9.0
+# scipy>=1.12.0
+
+# Other packages
+python-docx>=0.8.11
+sympy>=1.12.0
+
 
 

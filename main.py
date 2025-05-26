@@ -1,68 +1,79 @@
-# This is the main.py file.
+#!/usr/bin/env python3
+"""
+Calculator Agent - Головний файл запуску
+Інтелектуальний агент для математичних обчислень з використанням LangGraph та Google Gemini
+"""
 
-import os
 import sys
+import os
 
-# Try to import dependencies, with helpful error messages if they're missing
-try:
-    import dotenv
-except ImportError:
-    print("Error: Required package 'python-dotenv' not found.")
-    print("Please install it using: pip install python-dotenv")
-    sys.exit(1)
+# Додаємо src до Python path для імпортів
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'src'))
 
-try:
-    from src.agent.nlu import understand_query
-except ImportError as e:
-    print(f"Error importing required modules: {str(e)}")
-    print("\nThere might be issues with dependencies. Try the following:")
-    print("1. Install required packages: pip install -r requirements.txt")
-    print("2. If using Python 3.13, you may need to use Python 3.10 or 3.11 instead,")
-    print("   as some libraries don't yet support Python 3.13.")
-    print("3. Check that your PYTHONPATH includes the project root directory.")
-    sys.exit(1)
+# Ініціалізуємо логування перед іншими імпортами
+from src.utils.logger_config import setup_logging
+setup_logging()
+
+import logging
+from src.cli.REPL import run_chat_loop, run_chat_loop_with_streaming
+
+logger = logging.getLogger(__name__)
 
 def main():
-    # Load environment variables from .env file
-    dotenv.load_dotenv()
+    """Головна функція запуску програми"""
+    logger.info("🚀 Запуск Calculator Agent")
     
-    # Check if Google API key is set
-    if not os.environ.get("GOOGLE_API_KEY"):
-        print("Error: GOOGLE_API_KEY environment variable is not set.")
-        print("Please set it using the .env file or directly in your environment.")
-        print("\nWindows PowerShell: $env:GOOGLE_API_KEY=\"your-api-key\"")
-        print("Windows CMD: set GOOGLE_API_KEY=your-api-key")
-        print("Linux/macOS: export GOOGLE_API_KEY=\"your-api-key\"")
-        return
+    print("=" * 60)
+    print("🧮 CALCULATOR AGENT")
+    print("Інтелектуальний асистент для математичних обчислень")
+    print("Powered by Google Gemini + LangGraph")
+    print("=" * 60)
     
-    print("Calculator Agent NLU Demo")
-    print("-------------------------")
-    print("Type 'quit' or 'exit' to end the program.")
+    try:
+        # Перевіряємо наявність API ключа
+        from src.config.settings import GOOGLE_API_KEY
+        if not GOOGLE_API_KEY:
+            print("❌ ПОМИЛКА: GOOGLE_API_KEY не знайдено!")
+            print("💡 Створіть файл .env з рядком:")
+            print("   GOOGLE_API_KEY=your_api_key_here")
+            print("💡 Отримати ключ можна тут: https://aistudio.google.com/app/apikey")
+            return 1
+        
+        # Запускаємо інтерактивний чат
+        print("\n🎯 Режими роботи:")
+        print("1. Звичайний режим (рекомендований)")
+        print("2. Потоковий режим (експериментальний)")
+        print("3. Вихід")
+        
+        while True:
+            try:
+                choice = input("\n👤 Оберіть режим (1-3): ").strip()
+                
+                if choice == "1":
+                    print("\n🚀 Запуск звичайного режиму...")
+                    run_chat_loop()
+                    break
+                elif choice == "2":
+                    print("\n🚀 Запуск потокового режиму...")
+                    run_chat_loop_with_streaming()
+                    break
+                elif choice == "3":
+                    print("👋 До побачення!")
+                    break
+                else:
+                    print("❌ Невірний вибір. Введіть 1, 2 або 3.")
+                    
+            except KeyboardInterrupt:
+                print("\n👋 Програма завершена користувачем.")
+                break
+                
+    except Exception as e:
+        logger.error(f"Критична помилка: {e}", exc_info=True)
+        print(f"❌ Критична помилка: {e}")
+        return 1
     
-    while True:
-        # Get user input
-        user_query = input("\nEnter your query: ")
-        
-        # Check for exit command
-        if user_query.lower() in ["quit", "exit"]:
-            break
-        
-        # Process the query
-        try:
-            result = understand_query(user_query)
-            
-            # Display the result
-            print("\nResult:")
-            print(f"Intent: {result['intent']}")
-            print(f"Entities: {result['entities']}")
-            
-            # If there was an error, show it
-            if 'error_message' in result:
-                print(f"Error: {result['error_message']}")
-        except Exception as e:
-            print(f"\nAn error occurred: {str(e)}")
-        
-    print("Goodbye!")
+    return 0
 
 if __name__ == "__main__":
-    main()
+    exit_code = main()
+    sys.exit(exit_code)
