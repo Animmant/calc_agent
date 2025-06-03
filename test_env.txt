@@ -1,0 +1,7 @@
+# Скопіюйте цей вміст в файл .env (без розширення .txt)
+GOOGLE_API_KEY=your_google_api_key_here
+
+# Отримати API ключ можна тут:
+# https://aistudio.google.com/app/apikey
+ 
+# Після отримання ключа замініть "your_google_api_key_here" на ваш реальний ключ 

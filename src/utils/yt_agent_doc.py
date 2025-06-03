@@ -66,8 +66,8 @@ def generate_pdf_act(customer: Customer, jobs: list[Job]) -> None:
         # Створюємо папку typst якщо її немає
         os.makedirs("typst", exist_ok=True)
         
-        act_json = {
-            "customer": asdict(customer),
+    act_json = {
+        "customer": asdict(customer),
             "jobs": list(map(lambda j: asdict(j), jobs))
         }
         
@@ -96,12 +96,12 @@ def generate_pdf_act(customer: Customer, jobs: list[Job]) -> None:
                 print("📝 Створюю базовий шаблон...")
                 create_basic_typst_template()
             
-            command = ["typst", "compile", "--root", "./typst", "typst/act.typ"]
+    command = ["typst", "compile", "--root", "./typst", "typst/act.typ"]
             print(f"🔧 DEBUG: Виконую команду: {' '.join(command)}")
             
             result = subprocess.run(command,
-                                   check=True,
-                                   stdout=subprocess.PIPE,
+                       check=True,
+                       stdout=subprocess.PIPE,
                                    stderr=subprocess.PIPE, 
                                    text=True)
             
@@ -145,8 +145,8 @@ def generate_pdf_invoice(customer: Customer, jobs: list[Job]) -> None:
         # Створюємо папку typst якщо її немає
         os.makedirs("typst", exist_ok=True)
         
-        invoice_json = {
-            "customer": asdict(customer),
+    invoice_json = {
+        "customer": asdict(customer),
             "jobs": list(map(lambda j: asdict(j), jobs))
         }
         
@@ -175,12 +175,12 @@ def generate_pdf_invoice(customer: Customer, jobs: list[Job]) -> None:
                 print("📝 Створюю базовий шаблон...")
                 create_basic_invoice_template()
             
-            command = ["typst", "compile", "--root", "./typst", "typst/invoice.typ"]
+    command = ["typst", "compile", "--root", "./typst", "typst/invoice.typ"]
             print(f"🔧 DEBUG: Виконую команду: {' '.join(command)}")
             
             result = subprocess.run(command,
-                                   check=True,
-                                   stdout=subprocess.PIPE,
+                       check=True,
+                       stdout=subprocess.PIPE,
                                    stderr=subprocess.PIPE, 
                                    text=True)
             

@@ -37,43 +37,24 @@ def create_agent_executor(llm: LanguageModelLike, tools: Sequence[BaseTool]):
     """
     logger.info(f"Створення виконавця агента з {len(tools)} інструментами.")
 
-    # Для ReAct агента часто потрібен системний промпт, що пояснює як використовувати інструменти.
-    # LangGraph prebuilt `create_react_agent` може мати свій внутрішній промпт,
-    # але можна спробувати його кастомізувати, якщо це підтримується.
-    # Або, якщо створювати граф вручну, промпт задається явно.
-
     # Використовуємо create_react_agent для швидкого старту
     # Він використовує LangChain Expression Language (LCEL) під капотом.
     # `checkpointer` потрібен для збереження стану між викликами (для історії діалогу).
     memory_saver = InMemorySaver()
     
-    # Створюємо системний промпт для кращої поведінки агента
-    system_message = """Ти корисний асистент-математик, який може виконувати обчислення та розв'язувати математичні задачі.
-
-Доступні інструменти:
-- basic_calculator: для простих арифметичних операцій (+, -, *, /, **)
-- advanced_math_solver: для складніших математичних задач
-
-Правила:
-1. Завжди використовуй інструменти для обчислень, навіть для простих прикладів
-2. Пояснюй кроки розв'язання
-3. Перевіряй результати на розумність
-4. Відповідай українською мовою
-5. Будь точним та зрозумілим
-
-Приклади використання:
-- "Скільки буде 2+2?" → використай basic_calculator("2+2")
-- "Як знайти площу круга?" → використай advanced_math_solver("площа круга")"""
-    
-    agent_executor = create_react_agent(
-        model=llm,
-        tools=tools,
-        checkpointer=memory_saver,
-        # Додаємо системне повідомлення через messages_modifier
-        messages_modifier=system_message
-    )
-    logger.info("✅ Виконавець ReAct агента створений.")
-    return agent_executor
+    # Створюємо агента без системного промпту (він буде використовувати стандартний)
+    # Системний промпт можна додати пізніше через повідомлення або кастомний граф
+    try:
+        agent_executor = create_react_agent(
+            model=llm,
+            tools=tools,
+            checkpointer=memory_saver
+        )
+        logger.info("✅ Виконавець ReAct агента створений.")
+        return agent_executor
+    except Exception as e:
+        logger.error(f"Помилка створення агента: {e}")
+        raise
 
 # Приклад, як можна було б створити кастомний граф (закоментовано, для майбутнього)
 # def _should_continue(state: AgentState) -> str:

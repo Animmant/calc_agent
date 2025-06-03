@@ -1,0 +1,74 @@
+\documentclass[12pt,a4paper]{article}
+
+% Пакети для української мови
+\usepackage[utf8]{inputenc}
+\usepackage[ukrainian]{babel}
+\usepackage[T2A]{fontenc}
+
+% Математичні пакети
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathtools}
+
+% Графіка та діаграми
+\usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usetikzlibrary{arrows.meta, positioning, calc}
+
+% Форматування сторінки
+\usepackage[margin=2cm]{geometry}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+
+% Додаткові пакети
+\usepackage{xcolor}
+\usepackage{enumitem}
+\usepackage{float}
+\usepackage{graphicx}
+
+% Налаштування заголовків
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{Математичний зошит}
+\fancyhead[R]{\thepage\ з \pageref{LastPage}}
+\renewcommand{\headrulewidth}{0.4pt}
+
+% Кольори для виділення
+\definecolor{problemcolor}{RGB}{0, 102, 204}
+\definecolor{solutioncolor}{RGB}{0, 153, 76}
+\definecolor{answercolor}{RGB}{204, 0, 102}
+
+% Команди для форматування
+\newcommand{\problem}[1]{\textcolor{problemcolor}{\textbf{Задача:}} #1}
+\newcommand{\solution}{\textcolor{solutioncolor}{\textbf{Розв'язання:}}}
+\newcommand{\answer}[1]{\textcolor{answercolor}{\textbf{Відповідь:}} #1}
+
+% Теореми та означення
+\theoremstyle{definition}
+\newtheorem{definition}{Означення}
+\newtheorem{theorem}{Теорема}
+\newtheorem{lemma}{Лема}
+\newtheorem{corollary}{Наслідок}
+
+% Налаштування для математичних виразів
+\allowdisplaybreaks
+\setlength{\jot}{8pt}
+
+\begin{document}
+
+% Заголовок документа
+\begin{center}
+    {\Large \textbf{Математичний зошит}}\\[0.5cm]
+    {\large Calculator Agent}\\[0.3cm]
+    \today
+\end{center}
+
+\vspace{1cm}
+
+% Тут буде вставлено згенерований LaTeX контент
+{LATEX_CONTENT}
+
+\end{document} 

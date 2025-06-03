@@ -15,7 +15,7 @@ from src.utils.logger_config import setup_logging
 setup_logging()
 
 import logging
-from src.cli.REPL import run_chat_loop, run_chat_loop_with_streaming
+from src.cli.REPL import run_chat_loop
 
 logger = logging.getLogger(__name__)
 
@@ -40,38 +40,14 @@ def main():
             return 1
         
         # Запускаємо інтерактивний чат
-        print("\n🎯 Режими роботи:")
-        print("1. Звичайний режим (рекомендований)")
-        print("2. Потоковий режим (експериментальний)")
-        print("3. Вихід")
-        
-        while True:
-            try:
-                choice = input("\n👤 Оберіть режим (1-3): ").strip()
-                
-                if choice == "1":
-                    print("\n🚀 Запуск звичайного режиму...")
-                    run_chat_loop()
-                    break
-                elif choice == "2":
-                    print("\n🚀 Запуск потокового режиму...")
-                    run_chat_loop_with_streaming()
-                    break
-                elif choice == "3":
-                    print("👋 До побачення!")
-                    break
-                else:
-                    print("❌ Невірний вибір. Введіть 1, 2 або 3.")
-                    
-            except KeyboardInterrupt:
-                print("\n👋 Програма завершена користувачем.")
-                break
+        print("\n🚀 Запуск оптимізованого Calculator Agent...")
+        run_chat_loop()
                 
     except Exception as e:
         logger.error(f"Критична помилка: {e}", exc_info=True)
         print(f"❌ Критична помилка: {e}")
         return 1
-    
+        
     return 0
 
 if __name__ == "__main__":
